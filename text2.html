@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizMatchKE | AI-Powered Business Idea Recommender for Kenya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2E5CFF;
+            --primary-dark: #1A3DB0;
+            --secondary: #FF7D2E;
+            --accent: #00C896;
+            --light: #F8FAFF;
+            --dark: #1E293B;
+            --gray: #64748B;
+            --light-gray: #E2E8F0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #F8FAFF;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 80px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+');
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            font-size: 2.8rem;
+            color: var(--accent);
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .header-image {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto 0;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 5px solid white;
+            transform: perspective(1000px) rotateX(10deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .header-image:hover {
+            transform: perspective(1000px) rotateX(5deg);
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #00B286;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* How It Works Section */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 280px;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-number {
+            background-color: var(--accent);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-weight: bold;
+            font-size: 1.8rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step:after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(0, 200, 150, 0.1);
+            z-index: 0;
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            margin-top: -50px;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+        
+        /* SDG Section */
+        .sdg-section {
+            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sdg-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+');
+        }
+        
+        .sdg-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .sdg-cards {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .sdg-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .sdg-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .sdg-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .sdg-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+        
+        /* Examples Section */
+        .examples {
+            overflow-x: auto;
+            margin-top: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            background: white;
+            padding: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #F8FAFF;
+        }
+        
+        tr:hover {
+            background-color: #F1F5FF;
+        }
+        
+        .rating {
+            color: gold;
+            letter-spacing: 3px;
+        }
+        
+        .location-icon {
+            margin-right: 5px;
+        }
+        
+        /* Interactive Demo Section */
+        .demo-section {
+            background-color: var(--light);
+            padding: 80px 0;
+        }
+        
+        .demo-container {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .demo-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .demo-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .demo-image img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+        
+        .demo-image img:hover {
+            transform: perspective(1000px) rotateY(10deg);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 92, 255, 0.2);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            max-width: 350px;
+            position: relative;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .testimonial:before {
+            content: '"';
+            font-size: 5rem;
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            color: var(--accent);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .team-img {
+            width: 100px; /* Adjust size */
+            border-radius: 50%; /* Circular image */
+            margin-bottom: 10px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .author-info {
+            line-height: 1.4;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .author-location {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Team Section */
+        .team-section {
+            background-color: white;
+            padding: 80px 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-image {
+            height: 200px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 4rem;
+        }
+        
+        .team-info {
+            padding: 25px;
+        }
+        
+        .team-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-dark);
+        }
+        
+        .team-role {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        /* Final CTA */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-about {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--dark);
+        }
+        
+        .modal-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .steps {
+                flex-direction: column;
+            }
+            
+            .step {
+                margin-bottom: 20px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .features {
+                padding: 40px 20px;
+            }
+            
+            .demo-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Hero Section -->
+    <header>
+        <div class="header-bg"></div>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-lightbulb logo-icon"></i>
+                <span>BizMatchKE</span>
+            </div>
+            <div class="tagline">AI-powered business recommendations tailored to your skills, budget, and location in Kenya</div>
+            <div class="btn-group">
+                <a href="#demo" class="btn btn-primary">Try Demo</a>
+                <a href="#" class="btn btn-secondary" onclick="showComingSoon()">Learn More</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Kenyan entrepreneurs" class="header-image">
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <div class="container">
+        <div class="features">
+            <h2 class="section-title">Why Choose BizMatchKE?</h2>
+            <p class="section-subtitle">Our AI-powered platform takes the guesswork out of starting a business in Kenya</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card" onclick="showComingSoon()">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI-Powered Matching</h3>
+                    <p>Our advanced algorithm analyzes your profile and local market data to suggest the best business ideas for you.</p>
+                </div>
+                <div class="feature-card" onclick="showComingSoon()">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Location-Specific</h3>
+                    <p>Get recommendations tailored to your specific county and local market conditions in Kenya.</p>
+                </div>
+                <div class="feature-card" onclick="showComingSoon()">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Budget Filtering</h3>
+                    <p>Only see business ideas that match your available capital, from side hustles to full-scale ventures.</p>
+                </div>
+                <div class="feature-card" onclick="showComingSoon()">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-africa"></i>
+                    </div>
+                    <h3>SDG-Aligned</h3>
+                    <p>Discover businesses that contribute to sustainable development goals while being profitable.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">How BizMatchKE Works</h2>
+            <p class="section-subtitle">Get personalized business recommendations in just 3 simple steps</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Tell Us About You</h3>
+                    <p>Complete a quick survey about your skills, interests, location, and available capital.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Our AI Analyzes</h3>
+                    <p>Our algorithm matches your profile with local market data and successful business models.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Your Ideas</h3>
+                    <p>Receive a personalized list of business opportunities with startup guides and resources.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SDG Section -->
+    <section class="sdg-section">
+        <div class="sdg-bg"></div>
+        <div class="container sdg-content">
+            <h2 class="section-title" style="color: white;">Aligned with Sustainable Development Goals</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">BizMatchKE helps you build businesses that create positive impact</p>
+            
+            <div class="sdg-cards">
+                <div class="sdg-card">
+                    <h3><i class="fas fa-hands-helping sdg-icon"></i> SDG 1: No Poverty</h3>
+                    <p>By recommending viable business ideas tailored to individual circumstances, we empower Kenyans to create sustainable livelihoods and lift themselves out of poverty.</p>
+                </div>
+                <div class="sdg-card">
+                    <h3><i class="fas fa-briefcase sdg-icon"></i> SDG 8: Decent Work & Economic Growth</h3>
+                    <p>Our platform fosters entrepreneurship and job creation by guiding users toward business opportunities that align with local market needs and growth potential.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section" id="demo">
+        <div class="container">
+            <h2 class="section-title">Try Our Interactive Demo</h2>
+            <p class="section-subtitle">See how BizMatchKE can help you find your perfect business match</p>
+            
+            <div class="demo-container">
+                <div class="demo-content">
+                    <form id="demoForm">
+                        <div class="form-group">
+                            <label for="location">Where in Kenya are you located?</label>
+                            <select id="location" onchange="updateDemo()">
+                                <option value="">Select your county</option>
+                                <option value="nairobi">Nairobi</option>
+                                <option value="mombasa">Mombasa</option>
+                                <option value="kisumu">Kisumu</option>
+                                <option value="nakuru">Nakuru</option>
+                                <option value="kakamega">Kakamega</option>
+                                <option value="rural">Rural Area</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="budget">What's your available startup capital?</label>
+                            <select id="budget" onchange="updateDemo()">
+                                <option value="">Select your budget range</option>
+                                <option value="low">Under KES 10,000</option>
+                                <option value="medium">KES 10,000 - 50,000</option>
+                                <option value="high">KES 50,000 - 200,000</option>
+                                <option value="vhigh">Over KES 200,000</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="skills">What are your main skills/interests?</label>
+                            <select id="skills" onchange="updateDemo()">
+                                <option value="">Select your skills</option>
+                                <option value="tech">Technology/Digital</option>
+                                <option value="creative">Creative/Arts</option>
+                                <option value="food">Food/Cooking</option>
+                                <option value="trade">Trade/Skilled Work</option>
+                                <option value="sales">Sales/Marketing</option>
+                                <option value="service">Customer Service</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary" onclick="showComingSoon()" style="width: 100%;">
+                            Get My Business Ideas
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="demo-image">
+                    <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Demo results" id="demoImage">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Example Recommendations -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Example Business Recommendations</h2>
+            <p class="section-subtitle">Here are some sample business ideas our system might suggest</p>
+            
+            <div class="examples">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Business Idea</th>
+                            <th>Skills Needed</th>
+                            <th>Startup Cost</th>
+                            <th>Location</th>
+                            <th>Profit Potential</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Freelance Graphic Design</td>
+                            <td>Creativity, Basic Design Tools</td>
+                            <td>KES 5,000-15,000</td>
+                            <td><i class="fas fa-globe location-icon"></i> Global (Online)</td>
+                            <td><span class="rating">★★★★☆</span></td>
+                        </tr>
+                        <tr>
+                            <td>Local Organic Juice Bar</td>
+                            <td>Food Prep, Customer Service</td>
+                            <td>KES 50,000-150,000</td>
+                            <td><i class="fas fa-city location-icon"></i> Urban Areas</td>
+                            <td><span class="rating">★★★☆☆</span></td>
+                        </tr>
+                        <tr>
+                            <td>Solar Panel Installation</td>
+                            <td>Technical Skills, Sales</td>
+                            <td>KES 100,000-500,000</td>
+                            <td><i class="fas fa-sun location-icon"></i> High Sunlight Regions</td>
+                            <td><span class="rating">★★★★★</span></td>
+                        </tr>
+                        <tr>
+                            <td>Agri-Tourism Farm</td>
+                            <td>Hospitality, Agriculture</td>
+                            <td>KES 200,000-1,000,000</td>
+                            <td><i class="fas fa-tree location-icon"></i> Rural/Scenic Areas</td>
+                            <td><span class="rating">★★★★☆</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mobile Phone Repair</td>
+                            <td>Technical Repair Skills</td>
+                            <td>KES 20,000-50,000</td>
+                            <td><i class="fas fa-mobile-alt location-icon"></i> Urban/Semi-Urban</td>
+                            <td><span class="rating">★★★★☆</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" style="background-color: #F1F5FF;">
+        <div class="container">
+            <h2 class="section-title">What Kenyan Entrepreneurs Say</h2>
+            <p class="section-subtitle">Hear from people who've used our platform to find business ideas</p>
+            
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p>BizMatchKE helped me discover a business I never thought of—now I run a profitable drone photography service in Nairobi!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JK</div>
+                        <div class="author-info">
+                            <div class="author-name">James Kariuki</div>
+                            <div class="author-location">Nairobi, Kenya</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p>The location-based suggestions saved me from starting a business that wouldn't work in my rural area. I'm now running a successful agri-supply shop.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah Mwangi</div>
+                            <div class="author-location">Kakamega, Kenya</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p>As a recent graduate with limited capital, BizMatchKE showed me how to start a digital marketing agency with just my laptop and skills.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DN</div>
+                        <div class="author-info">
+                            <div class="author-name">David Njoroge</div>
+                            <div class="author-location">Mombasa, Kenya</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="section-title">
+            <h2>Our Team</h2>
+            <p>The dedicated individuals behind BIZMATCHKE</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-card">
+                <img src="path/to/image.jpg" alt="Jotham Mboya" class="team-img">
+                <h3>Jotham Mboya</h3>
+                <p>Deployment & Developer</p>
+                <p>Development, System Deployment</p>
+            </div>
+            <div class="team-card">
+                <img src="C:\Users\HP\Documents\vall\bizmatchke\images\Vall.jpeg" alt="Vallarie" class="team-img">
+                <h3>Vallarie Seroney</h3>
+                <p>Research, Data Collection/Analysis</p>
+                <p>Data Collection, Data Analysis</p>
+            </div>
+            <div class="team-card">
+                <img src="C:\Users\HP\Documents\vall\bizmatchke\images\mercy.jpeg" alt="Mercy" class="team-img">
+                <h3>Mercy Okumu</h3>
+                <p>Visualization & Analytics</p>
+                <p>Data Visualization, Analytics</p>
+            </div>
+            <div class="team-card">
+                <img src="C:\Users\HP\Documents\vall\bizmatchke\images\faith.jpg" alt="Faith" class="team-img">
+                <h3>Faith Cherotich</h3>
+                <p>Modeling</p>
+                <p>Machine Learning, Statistical Modeling</p>
+            </div>
+            <div class="team-card">
+                <img src="C:\Users\HP\Documents\vall\bizmatchke\images\max.jpeg" alt="Maxwell" class="team-img">
+                <h3>Maxwell Gitonga</h3>
+                <p>Data Analysis & Deployment</p>
+                <p>Deployment</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-section">
+        <div class="container cta-content">
+            <h2 class="cta-title">Ready to Find Your Perfect Business Match?</h2>
+            <p class="cta-subtitle">Join thousands of Kenyan entrepreneurs who've discovered profitable, sustainable business ideas with BizMatchKE</p>
+            <div class="btn-group">
+                <a href="#demo" class="btn btn-primary">Try Demo Now</a>
+                <a href="#" class="btn btn-secondary" onclick="showComingSoon()">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>BizMatchKE</span>
+                    </div>
+                    <p class="footer-about">AI-powered business recommendations tailored for Kenyan entrepreneurs.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" onclick="showComingSoon()"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" onclick="showComingSoon()"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" onclick="showComingSoon()"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link" onclick="showComingSoon()"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-links">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#" onclick="showComingSoon()">Home</a></li>
+                            <li><a href="#demo" onclick="showComingSoon()">Demo</a></li>
+                            <li><a href="#" onclick="showComingSoon()">How It Works</a></li>
+                            <li><a href="#" onclick="showComingSoon()">Examples</a></li>
+                            <li><a href="#" onclick="showComingSoon()">About Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-links">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#" onclick="showComingSoon()">Blog</a></li>
+                            <li><a href="#" onclick="showComingSoon()">Business Guides</a></li>
+                            <li><a href="#" onclick="showComingSoon()">Funding Options</a></li>
+                            <li><a href="#" onclick="showComingSoon()">Market Research</a></li>
+                            <li><a href="#" onclick="showComingSoon()">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <div class="footer-links">
+                        <h3>Contact</h3>
+                        <ul>
+                            <li><a href="#" onclick="showComingSoon()">hello@bizmatchke.com</a></li>
+                            <li><a href="#" onclick="showComingSoon()">+254 700 123456</a></li>
+                            <li><a href="#" onclick="showComingSoon()">Nairobi, Kenya</a></li>
+                            <li><a href="#" onclick="showComingSoon()">Support</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 BizMatchKE. All rights reserved. | <a href="#" onclick="showComingSoon()">Privacy Policy</a> | <a href="#" onclick="showComingSoon()">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Coming Soon Modal -->
+    <div class="modal" id="comingSoonModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('comingSoonModal')">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <h2>Coming Soon!</h2>
+            <p>This feature is currently under development. We're working hard to bring you the best business matching experience in Kenya.</p>
+            <p>Sign up for our newsletter to be notified when we launch!</p>
+            <form id="newsletterForm" style="margin-top: 20px;">
+                <input type="email" placeholder="Enter your email" required style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid var(--light-gray);">
+                <button type="button" class="btn btn-primary" onclick="submitNewsletter()" style="width: 100%;">Notify Me</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Simple JavaScript functions for the demo
+        function updateDemo() {
+            const location = document.getElementById('location').value;
+            const budget = document.getElementById('budget').value;
+            const skills = document.getElementById('skills').value;
+            
+            // In a real implementation, this would fetch actual recommendations
+            console.log("Updating demo with:", {location, budget, skills});
+        }
+        
+        function showComingSoon() {
+            document.getElementById('comingSoonModal').style.display = 'flex';
+            return false;
+        }
+        
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        
+        function submitNewsletter() {
+            const email = document.querySelector('#newsletterForm input[type="email"]').value;
+            if (email) {
+                alert('Thank you for your interest! We\'ll notify you when we launch.');
+                closeModal('comingSoonModal');
+                document.querySelector('#newsletterForm input[type="email"]').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
